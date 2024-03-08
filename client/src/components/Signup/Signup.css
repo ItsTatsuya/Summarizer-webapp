@@ -1,0 +1,90 @@
+.body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+
+.header{
+    margin: 0px;
+    padding-left: 30px;
+    padding-top:10px;
+    text-align: left;
+}
+.text{
+    margin: 0px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    font-size: medium;
+    color: grey;
+    text-align: left;
+}
+
+.main{
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    padding: 10px 5px;
+    width: 400px;
+    transition: transform 0.2s;
+    text-align: center;
+}
+
+label{
+    display: block;
+    text-align: left;
+    padding-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    width: 100%;
+}
+
+input{
+    display: block;
+    padding: 12px;
+    width: 75%;
+    margin-left: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+button{
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 15px;
+    width: 80%;
+    align-items: left;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    cursor:pointer
+
+}
+.registerbutton{
+    margin-top: 20px;
+    background-color: black;
+    color: white;
+}
+
+.login{
+    display: block;
+    font-size: small;
+}
+.logintext{
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 5px;
+}
+
+.loginlink:hover{
+    color: black;
+}

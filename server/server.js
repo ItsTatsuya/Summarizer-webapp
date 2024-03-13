@@ -1,48 +1,63 @@
 const express = require("express");
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const cors = require("cors");
+// const { MongoClient, ServerApiVersion } = require("mongodb");
+const mongoss=require('mongoose')
+//const cors = require("cors");
 
-const uri =
-  "mongodb+srv://admin:5fXQyOdTlXEIWPgW@cluster0.4gua2yk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const uri =
+  // "mongodb+srv://admin:5fXQyOdTlXEIWPgW@cluster0.4gua2yk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const app = express();
+const dbUrl=
+"mongodb+srv://Luffy:MonkeyDLuffy@cluster0.lec03kd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-app.use(cors());
-app.use(express.json());
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+mongoss.connect(dbUrl).then((err,res)=>{
+  if(err){
+    console.log(err);
+  }
+  console.info("connected");
+  // mongoss.connection.close();
 });
 
-// app.get("/api", (req, res) => {
-//   res.json({ users: ["userOne", "userTwo", "userThree"] });
+
+
+// const app = express();
+
+// app.use(cors());
+// app.use(express.json());
+
+// app.listen(5000, () => {
+//   console.log("Server running on port 5000");
 // });
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
+// // app.get("/api", (req, res) => {
+// //   res.json({ users: ["userOne", "userTwo", "userThree"] });
+// // });
 
-async function run() {
-  // Connect the client to the server	(optional starting in v4.7)
-  await client.connect();
-  // Send a ping to confirm a successful connection
-  await client.db("admin").command({ ping: 1 });
-  database = client.db("youtube-summarizer");
-  console.log("Pinged your deployment. You successfully connected to MongoDB!");
-}
-run().catch(console.dir);
+// const client = new MongoClient(uri, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+//   },
+// });
 
-app.get("/api/database", async (req, res) => {
-  database
-    .collection("userdetails")
-    .find({})
-    .toArray((err, result) => {
-      if (err) throw err;
-      console.log(result);
-      res.send(result);
-    });
-});
+// async function run() {
+//   // Connect the client to the server	(optional starting in v4.7)
+//   await client.connect();
+//   // Send a ping to confirm a successful connection
+//   await client.db("admin").command({ ping: 1 });
+//   database = client.db("youtube-summarizer");
+//   console.log("Pinged your deployment. You successfully connected to MongoDB!");
+// }
+// run().catch(console.dir);
+
+// app.get("/api/database", async (req, res) => {
+//   database
+//     .collection("userdetails")
+//     .find({})
+//     .toArray((err, result) => {
+//       if (err) throw err;
+//       console.log(result);
+//       res.send(result);
+//     });
+// });

@@ -88,3 +88,9 @@ button{
 .loginlink:hover{
     color: black;
 }
+
+.error-password{
+    color: red;
+    font-size: medium;
+    padding: 10px;
+}

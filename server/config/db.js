@@ -1,10 +1,14 @@
-const mongoss=require('mongoose');
-require('dotenv').config({ path: '../.env' });
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoss.connect(process.env.DB_URL).then((err,res)=>{
-  if(err){
-    console.log(err);
+async function connectToDatabase() {
+  try {
+    const dbUrl = process.env.DB_URL;
+    await mongoose.connect(dbUrl);
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
   }
-  console.info("connected");
-  // mongoss.connection.close();
-});
+}
+
+connectToDatabase();

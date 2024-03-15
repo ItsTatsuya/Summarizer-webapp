@@ -1,0 +1,11 @@
+/* App.css */
+@import url('./fonts.css');
+
+/* App.css */
+body {
+  font-family: 'GeistSans', sans-serif;
+}
+
+main{
+    font-family: 'GeistSans', sans-serif;
+}

@@ -1,23 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Signup.css"
+import { Link } from 'react-router-dom'
 export const Signup = () => {
+    const [name,setName]=useState();
+    const [email,setEmail]=useState();
+    const [password,setPassword]=useState();
+    const [cpass,SetCPassword]=useState();
+    const [passwordsMatch,setPasswordMatch]=useState(true);
+    
+    const handleFormSubmit=(e)=>{
+        e.preventDefault();
+        if(password===cpass){
+            setPasswordMatch(true);
+            console.log('Passwords match. Registering...')
+        }
+        else{
+            setPasswordMatch(false);
+        }
+    } 
+
   return (
     <div className='body'>
         <div className='main'>
             <h1 className='header'>Register</h1>
             <p className='text'>Enter your information to create an account</p>
-            <form className='registerform'>
+
+            {/* form tag */}
+            <form className='registerform' onSubmit={handleFormSubmit}>
                 <label  htmlFor='name'>Full name</label>
-                <input type='text' id='name' name='name' required/>
+
+                {/* name field */}
+                <input type='text' id='name' name='name' 
+                onChange={(e)=>setName(e.target.value)} required/>
+
+                {/* email field */}
                 <label htmlFor='email'>Email</label>
-                <input type='email' id='email' name='email' required/>
+                <input type='email' id='email' name='email' 
+                onChange={(e)=>setEmail(e.target.value)}required/>
+
+                {/* password field  */}
                 <label htmlFor='password'>Password</label>
-                <input type='password' id='password' name='password' required/>
+                <input type='password' id='password' name='password'
+                onChange={(e)=>setPassword(e.target.value)} required/>
+
+                {/* password field  */}
                 <label htmlFor='password'>Confirm Password</label>
-                <input type='password' id='confirmpassword' name='confirmpassword' required/>
+                <input type='password' id='confirmpassword' name='confirmpassword' 
+                onChange={(e)=>{SetCPassword(e.target.value)}} required/>
+                {!passwordsMatch && 
+                    <p className='error-password'>Passwords do not match</p>
+                }
 
                 <div className='register'>
-                    <button type='submit' onClick={''} className='registerbutton'>Register</button>
+                    <button type='submit'  className='registerbutton'>Register</button>
                 </div>
 
                 <div className='Rgoogle'>
@@ -26,7 +61,7 @@ export const Signup = () => {
 
                 <div className='login'>
                     <p className='logintext'>Already have an account? <br />
-                        <a href='#' className='loginlink'>Log in instead</a>
+                        <Link to={"/login"} className='loginlink'>Log in instead</Link>
                     </p>
                 </div>
             </form>

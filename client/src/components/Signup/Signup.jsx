@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from "axios"
 import "./Signup.css"
 import { Link } from 'react-router-dom'
 export const Signup = () => {
@@ -12,7 +13,10 @@ export const Signup = () => {
         e.preventDefault();
         if(password===cpass){
             setPasswordMatch(true);
-            console.log('Passwords match. Registering...')
+            axios.post('http://localhost:3001/register',{name ,email,password})
+            .then(res=>{
+                alert("ok")
+            }).catch(err=>console.log(err))
         }
         else{
             setPasswordMatch(false);

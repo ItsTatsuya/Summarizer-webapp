@@ -11,7 +11,8 @@ export const HomePage = () => {
         </div>
         <nav className="navbar-2">
           <span className="navsign">
-            <Link to={"/login"} className="navsignlink" >Sign In</Link> / <Link to={"/register"} className="navsignlink">Sign Up</Link>
+            <Link to={"/login"} className="navsigninlink" > <button type="button">Sign In</button> </Link> 
+            <Link to={"/register"} className="navsignuplink"><button type="button">Sign Up</button></Link>
           </span>
         </nav>
       </header>
@@ -30,7 +31,7 @@ export const HomePage = () => {
                 className="input"
                 placeholder="Enter YouTube URL"
               />
-              <button type="submit" onClick={""} className="button">
+              <button type="button" onClick={""} className="button">
                 Summarize Now
               </button>
             </form>

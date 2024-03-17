@@ -1,5 +1,3 @@
-
-
 .body-home{
   width: 100%;
   padding: 0px;
@@ -18,7 +16,7 @@
 }
 
 .logofont{
-  font-size: small;
+  font-size: 20px;
   font-weight: bold;
   margin-left: 10px;
   margin-bottom: 10px;
@@ -26,23 +24,42 @@
 }
 
 .navsign {
-  color: black;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: right;
-  margin-right: 40px;
+  display: flex;
+  align-items: center;
 }
 
-.navsignlink{
+/* .navsignlink{
   color: black;
   text-decoration: none;
+} */
+
+.navsign button {
+  background-color: #000000; /* white background color */
+  color: #ffffff; /* black text color */
+  padding: 10px 10px;
+  border-radius: 10px;
+  cursor: pointer; 
+  font-size: 16px; 
+  margin: 5px;
+  display: inline-block !important;
 }
+
+.navsign button:hover {
+  background-color: #ddd; 
+  color: #000;
+}
+
+.navsigninlink button{
+  background-color: #ffffff;
+  color: #000000; 
+  border: 1px solid #000000;
+}
+
 
 /* Main content styles */
 .main-home {
   background-color: #fff;
   border-radius: 0;
-  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
   margin-top: 30px;
   width: 100%;
 }
@@ -77,10 +94,10 @@
 }
 
 .button {
-  background-color: #333;
+  background-color: #000000;
   color: #fff;
   border: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
   max-width: 150px;
@@ -89,6 +106,11 @@
   align-items: center;
   justify-content: center;
   padding:10px;
+}
+
+.button:hover {
+  background-color: rgb(99, 99, 99);
+  color: #000000;
 }
 
 /* How it works section styles */

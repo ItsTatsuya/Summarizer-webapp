@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from "axios"
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import "./Signup.css"
 
 export const Signup = () => {
@@ -9,6 +9,8 @@ export const Signup = () => {
     const [password,setPassword]=useState();
     const [cpass,SetCPassword]=useState();
     const [passwordsMatch,setPasswordMatch]=useState(true);
+
+    const navigate=useNavigate();
     
     const handleFormSubmit=(e)=>{
         e.preventDefault();
@@ -16,7 +18,8 @@ export const Signup = () => {
             setPasswordMatch(true);
             axios.post('http://localhost:3001/register',{name ,email,password})
             .then(res=>{
-                alert("ok")
+                alert("registered....")
+                navigate("/")
             }).catch(err=>console.log(err))
         }
         else{

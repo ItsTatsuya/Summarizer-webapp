@@ -26,6 +26,7 @@
 .navsign {
   display: flex;
   align-items: center;
+  font-size: small;
 }
 
 /* .navsignlink{
@@ -33,26 +34,32 @@
   text-decoration: none;
 } */
 
-.navsign button {
-  background-color: #000000; /* white background color */
-  color: #ffffff; /* black text color */
-  padding: 10px 10px;
-  border-radius: 10px;
-  cursor: pointer; 
-  font-size: 16px; 
-  margin: 5px;
-  display: inline-block !important;
+.navsignuplink{
+  background-color:black;
+  color:white; 
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: small;
+  display: inline;
+  padding: 10px;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.navsign button:hover {
-  background-color: #ddd; 
-  color: #000;
-}
 
-.navsigninlink button{
+
+.navsigninlink{
   background-color: #ffffff;
   color: #000000; 
   border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: small;
+  display: inline;
+  padding: 10px;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 

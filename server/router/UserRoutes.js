@@ -1,18 +1,16 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-const UserModel = require("../models/User.js");
+const cors=require('cors');
+const { registerUser } = require('../Controllers/userControllers');
 
 const router = express.Router();
 
-router.post("/register", (req, res) => {
-    const { name, email, password } = req.body;
-    bcrypt.hash(password, 10)
-        .then(hash => {
-            UserModel.create({ name, email, password: hash })
-                .then(user => res.json({ status: "Ok" }))
-                .catch(err => res.json(err));
-        })
-        .catch(err => res.json(err));
-});
+// //midleware
+router.use(cors({
+    credentials:true,
+    origin:"http://localhost:3000"
+}));
+
+// router.get("/register",);
+router.post("/register",registerUser);
 
 module.exports = router;

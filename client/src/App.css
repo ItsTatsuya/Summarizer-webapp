@@ -1,11 +1,12 @@
 /* App.css */
-@import url('./fonts.css');
+/* @import url('./fonts.css'); */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 /* App.css */
 body {
-  font-family: 'GeistSans', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 main{
-    font-family: 'GeistSans', sans-serif;
+    font-family: 'Quicksans', sans-serif;
 }

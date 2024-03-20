@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from "axios";
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash, faCheckCircle } from '@fortawesome/free-solid-svg-icons'; // Import the check circle icon
 import "./Signup.css";
 
 export const Signup = () => {
@@ -10,6 +12,15 @@ export const Signup = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordsMatch, setPasswordsMatch] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
+    const [passwordRequirements, setPasswordRequirements] = useState({
+        length: false,
+        uppercase: false,
+        lowercase: false,
+        digit: false,
+        specialChar: false
+    });
+
     const navigate = useNavigate();
 
     const handleFormSubmit = async (e) => {
@@ -30,6 +41,31 @@ export const Signup = () => {
         }
     };
 
+    const checkPasswordRequirements = (value) => {
+        // Regular expressions to check for each requirement
+        const regex = {
+            length: /.{8,}/,
+            uppercase: /[A-Z]/,
+            lowercase: /[a-z]/,
+            digit: /\d/,
+            specialChar: /[^A-Za-z0-9]/
+        };
+
+        const requirementsMet = {
+            length: regex.length.test(value),
+            uppercase: regex.uppercase.test(value),
+            lowercase: regex.lowercase.test(value),
+            digit: regex.digit.test(value),
+            specialChar: regex.specialChar.test(value)
+        };
+
+        setPasswordRequirements(requirementsMet);
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className='body'>
             <div className='main'>
@@ -46,8 +82,41 @@ export const Signup = () => {
                         value={email} onChange={(e) => setEmail(e.target.value)} required />
 
                     <label htmlFor='password'>Password</label>
-                    <input type='password' id='password' name='password'
-                        value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <div className="password-input-container">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            id='password'
+                            name='password'
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                                checkPasswordRequirements(e.target.value);
+                            }}
+                            required
+                        />
+                        <button
+                            type="button"
+                            className="toggle-password"
+                            onClick={togglePasswordVisibility}
+                        >
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        </button>
+                    </div>
+
+                    <div className='content'>
+                        <p className='passwordhead'>Password Must Contain</p>
+                        <ul className="requirement-list">
+                            {Object.entries(passwordRequirements).map(([key, value]) => (
+                                <li key={key}>
+                                    <FontAwesomeIcon
+                                        icon={value ? faCheckCircle : "solid-circle"} // Use check circle or solid circle icon based on requirement met
+                                        className={value ? "requirement-checked" : "requirement-unchecked"}
+                                    />
+                                    <span>{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
                     <label htmlFor='confirmpassword'>Confirm Password</label>
                     <input type='password' id='confirmpassword' name='confirmpassword'

@@ -11,8 +11,8 @@ export const HomePage = () => {
         </div>
         <nav className="navbar-2">
           <span className="navsign">
-            <Link to={"/login"} className="navsigninlink" > <button type="button">Sign In</button> </Link> 
-            <Link to={"/register"} className="navsignuplink"><button type="button">Sign Up</button></Link>
+            <Link to={"/login"} className="navsigninlink" > Sign In </Link> 
+            <Link to={"/register"} className="navsignuplink">Sign Up</Link>
           </span>
         </nav>
       </header>

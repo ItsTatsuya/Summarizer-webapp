@@ -5,7 +5,7 @@ import {HomePage} from "./components/HomePage/HomePage.jsx";
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import axios from "axios";
 import {Toaster} from "react-hot-toast";
-
+import "./App.css"
 axios.defaults.baseURL="http://localhost:3001";
 axios.defaults.withCredentials=true;
 

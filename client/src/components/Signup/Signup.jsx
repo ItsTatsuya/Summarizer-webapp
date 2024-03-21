@@ -14,11 +14,11 @@ export const Signup = () => {
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const [passwordRequirements, setPasswordRequirements] = useState({
-        length: false,
-        uppercase: false,
-        lowercase: false,
-        digit: false,
-        specialChar: false
+        'At least 8 characters': false,
+        'At least one uppercase letter': false,
+        'At least one lowercase letter': false,
+        'At least one digit': false,
+        'At least one special character': false
     });
 
     const navigate = useNavigate();
@@ -52,11 +52,11 @@ export const Signup = () => {
         };
 
         const requirementsMet = {
-            length: regex.length.test(value),
-            uppercase: regex.uppercase.test(value),
-            lowercase: regex.lowercase.test(value),
-            digit: regex.digit.test(value),
-            specialChar: regex.specialChar.test(value)
+            'At least 8 characters': regex.length.test(value),
+            'At least one uppercase letter': regex.uppercase.test(value),
+            'At least one lowercase letter': regex.lowercase.test(value),
+            'At least one digit': regex.digit.test(value),
+            'At least one special character': regex.specialChar.test(value)
         };
 
         setPasswordRequirements(requirementsMet);

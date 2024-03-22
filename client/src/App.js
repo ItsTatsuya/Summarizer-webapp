@@ -3,6 +3,7 @@ import {Login} from "./components/Login/Login.jsx";
 import {Signup} from "./components/Signup/Signup.jsx";
 import {HomePage} from "./components/HomePage/HomePage.jsx";
 import {BrowserRouter,Routes,Route} from "react-router-dom";
+import  VerifyAccount from "./components/VerifyAccount/VerifyAccount.jsx"
 import axios from "axios";
 import {Toaster} from "react-hot-toast";
 import "./App.css"
@@ -19,6 +20,7 @@ function App(props) {
           <Route path="/" element={<HomePage/>}/>;
           <Route path="/register" element={<Signup/>}/>;
           <Route path="/login" element={<Login/>}/>
+          <Route path="/activate-account" element={<VerifyAccount/>}/>
         </Routes>
         </BrowserRouter>
     </div>

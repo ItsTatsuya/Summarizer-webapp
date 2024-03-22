@@ -1,16 +1,18 @@
 const express = require('express');
-const cors=require('cors');
+const cors = require('cors');
 const { registerUser } = require('../Controllers/userControllers');
+const { activateAccount } = require("../Controllers/AccountActive");
 
 const router = express.Router();
 
-// //midleware
+// Middleware
 router.use(cors({
-    credentials:true,
-    origin:"http://localhost:3000"
+    credentials: true,
+    origin: "http://localhost:3000"
 }));
 
-// router.get("/register",);
-router.post("/register",registerUser);
+// Routes
+router.post("/register", registerUser); // Register a new user
+router.get("/activate-account", activateAccount); // Activate user account
 
 module.exports = router;

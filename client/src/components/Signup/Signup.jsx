@@ -27,6 +27,7 @@ export const Signup = () => {
         e.preventDefault();
         if (password === confirmPassword) {
             try {
+                setPasswordsMatch(true);
                 const { data } = await axios.post("/register", { name, email, password });
                 if (data.error) {
                     toast.error(data.error);

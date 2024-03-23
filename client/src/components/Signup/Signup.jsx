@@ -32,7 +32,22 @@ export const Signup = () => {
                 if (data.error) {
                     toast.error(data.error);
                 } else {
-                    toast.success("Registered");
+                    toast.success("Check your Email for verification");
+                    const verificationInterval = setInterval(async () => {
+                        try {
+                            const response = await axios.get(`/register/user/${email}`);
+                            console.log(response.data.verified);
+                            if (response.data.verified === true) { // Check the data received from the response
+                                clearInterval(verificationInterval); // Stop the interval once verified
+                                navigate("/"); // Navigate to home page after verification
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }, 5000); // Check every 5 seconds
+    
+                    // Clean up function to clear interval when component unmounts
+                    return () => clearInterval(verificationInterval);
                 }
             } catch (error) {
                 console.error(error);

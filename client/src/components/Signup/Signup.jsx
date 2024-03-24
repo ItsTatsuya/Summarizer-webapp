@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faCheckCircle } from '@fortawesome/free-solid-svg-icons'; // Import the check circle icon
 import "./Signup.css";
+// require("dotenv").config()
 
 export const Signup = () => {
     const [name, setName] = useState('');
@@ -22,6 +23,15 @@ export const Signup = () => {
     });
 
     const navigate = useNavigate();
+
+    const handleGoogleSignIn = () => {
+        // Redirect the user to the backend route for Google OAuth authentication
+        window.open(
+           `${process.env.REACT_APP_API_URL}/auth/google/callback`,
+           "_self"
+        );
+        
+    };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -146,7 +156,7 @@ export const Signup = () => {
                     </div>
 
                     <div className='Rgoogle'>
-                        <button type='submit' onClick={''} className='Rgooglebutton'>Register with Google</button>
+                        <button type='submit' onClick={handleGoogleSignIn} className='Rgooglebutton'>Register with Google</button>
                     </div>
 
                     <div className='login'>

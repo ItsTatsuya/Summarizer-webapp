@@ -18,7 +18,6 @@ const activateAccount = async (req, res) => {
         await Token.findOneAndDelete({ _id: token._id });
 
 
-        console.log("jayichu");
         return res.status(200).json({ message: "Email verified successfully" });
     } catch (error) {
         console.error(error);

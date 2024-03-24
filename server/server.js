@@ -1,13 +1,26 @@
 const mongoose = require("./config/db.js");
 const UserRouter = require("./router/UserRoutes");
 const express = require('express');
+const session = require('express-session');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const passportSetup=require("./config/passport-config.js")
+require("dotenv").config()
+
 
 const app = express();
 
 // Middleware
+app.use(session({
+    secret: process.env.CLIENT_SECRET,
+    resave: false,
+    saveUninitialized: false
+  }));
+
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use(cookieParser());

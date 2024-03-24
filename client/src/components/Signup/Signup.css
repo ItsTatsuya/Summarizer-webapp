@@ -88,8 +88,55 @@ button{
     color: black;
 }
 
+.content{
+    text-align: left;
+    display: block;
+}
+
+.requirement-list{
+    list-style-type: none;
+}
+
+.passwordhead{
+    margin-left: 40px;
+    font-weight: bold;
+}
+
 .error-password{
     color: red;
     font-size: medium;
     padding: 10px;
 }
+
+.solid-circle {
+    width: 10px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border-radius: 50%; /* Makes the element a circle */
+    background-color: #000; /* Solid color for the circle */
+    display: inline-block;
+    margin-right: 10px; /* Ensures it behaves like an inline element */
+}
+
+.password-input-container {
+    position: relative;
+  }
+  
+  .password-input-container input[type="password"] {
+    padding-right: 10px; /* Adjust the padding to accommodate the button */
+  }
+  
+  .password-input-container button {
+    position: absolute;
+    top: 35%;
+    right: -5px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: auto;
+  }
+
+  .check{
+    
+  }
+  

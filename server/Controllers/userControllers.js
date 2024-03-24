@@ -1,5 +1,10 @@
 const UserModel = require("../models/User.js");
 const passwordValidator = require("../helper/register");
+const { passChecking, hashPassword } = require("../helper/register");
+const Token=require("../models/Token.js"); 
+const crypto=require("crypto");
+const verifyEmail = require("../utils/verifyEmail");
+
 
 const registerUser = async (req, res) => {
     try {
@@ -35,22 +40,22 @@ const registerUser = async (req, res) => {
         return res.json({ error: passwordErrors });
     }
 
+        //calling password hash
+        const hashedPassword = await hashPassword(password);
 
         //posting to db
-        const user = await UserModel.create({ name, email, password});
+        const user = await UserModel.create({ name, email, password: hashedPassword });
+
+        const token = await Token.create({
+            userId:user._id,
+            token:crypto.randomBytes(16).toString("hex")
+        });
+
+        const link=`http://localhost:3000/activate-account?token=${token.token}`;
+        await verifyEmail(user.email,link);
+        
         return res.json({ user });
 
-
-        
-       
-        
-
-        
-
-        //calling password hash
-        // const hash = hashPassword(password);
-
-        //creating db collection
         
     } catch (error) {
         // Handle unexpected errors

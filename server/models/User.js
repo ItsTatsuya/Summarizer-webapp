@@ -7,7 +7,11 @@ const UserSchema = mongoose.Schema({
     verified:{
         type:Boolean,
         default:false,
-    }
+    },
+    login:{
+        type:Boolean,
+        default:false,
+    },
 });
 
 const UserModel = mongoose.model("User", UserSchema);

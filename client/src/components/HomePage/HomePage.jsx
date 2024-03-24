@@ -1,8 +1,10 @@
 import React from "react";
 import "./HomePage.css";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 
 export const HomePage = () => {
+  const location = useLocation();
+  const { loggedIn } = location.state || {};
   return (
     <div className="body-home">
       <header className="navbar">
@@ -11,8 +13,20 @@ export const HomePage = () => {
         </div>
         <nav className="navbar-2">
           <span className="navsign">
-            <Link to={"/login"} className="navsigninlink" > Sign In </Link> 
-            <Link to={"/register"} className="navsignuplink">Sign Up</Link>
+            {loggedIn ? (
+              <Link to={"/profile"} className="navsigninlink">
+                UserProfile
+              </Link>
+            ) : (
+              <>
+                <Link to={"/login"} className="navsigninlink">
+                  Sign In
+                </Link>
+                <Link to={"/register"} className="navsignuplink">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </span>
         </nav>
       </header>

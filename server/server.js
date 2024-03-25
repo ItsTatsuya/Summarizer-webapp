@@ -1,5 +1,6 @@
 const mongoose = require("./config/db.js");
 const UserRouter = require("./router/UserRoutes");
+const LoginRouter =require("./router/LoginRouter.js");
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
@@ -27,6 +28,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/", UserRouter);
+app.use("/",LoginRouter);
 
 // Start server
 app.listen(3001, () => {

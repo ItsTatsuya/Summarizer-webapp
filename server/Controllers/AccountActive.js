@@ -4,17 +4,15 @@ const UserModel = require("../models/User.js");
 
 const activateAccount = async (req, res) => {
     try {
-        console.log("started");
         const token = await Token.findOne({
             token:  req.query.token,
         });
 
         if (!token) {
-            console.log("umfi ni");
             return res.status(500).json({ message: "Invalid token" });
         }
 
-        await UserModel.updateOne({ _id: token.userId }, { $set: { verified: true } });
+        await UserModel.updateOne({ _id: token.userId }, { $set: { verified: true ,login:true} });
         await Token.findOneAndDelete({ _id: token._id });
 
 

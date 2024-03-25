@@ -4,11 +4,11 @@ require('dotenv').config(); // Load environment variables
 const User = require('../models/googleUser'); // Import the User model
 
 // Configure Passport to use Google OAuth 2.0 strategy
-passport.use(new GoogleStrategy({
-  clientID: process.env.CLIENT_ID, // Client ID obtained from Google Developer Console
-  clientSecret: process.env.CLIENT_SECRET, // Client Secret obtained from Google Developer Console
-  callbackURL: 'http://localhost:3001/auth/google/callback', // Callback URL where Google will redirect after authentication
-  scope: ['profile', 'email'] // Scopes for accessing user profile and email
+passport.use('google-auth', new GoogleStrategy({
+  clientID: process.env.CLIENT_ID, 
+  clientSecret: process.env.CLIENT_SECRET, 
+  callbackURL: 'http://localhost:3001/auth/google/callback', 
+  scope: ['profile', 'email']
 },
 function(accessToken, refreshToken, profile, cb) {
   // This function gets called after successful authentication
@@ -18,42 +18,43 @@ function(accessToken, refreshToken, profile, cb) {
     .then(existingUser => {
       if (existingUser) {
         // If the email is already registered, return the existing user
-        return cb(null, false, { message: 'Email is already registered' });
+        return cb(null,false, existingUser);
       } else {
         // If the email is not registered, create a new user using Google profile data
         const newUser = new User({
-          name: profile.displayName, // Use displayName from Google profile
+          name: profile.displayName,
           email: profile.emails[0].value,
-          verified: true, 
-          login:true// Assuming the user is verified via Google OAuth
+          verified: true,
+          login: true
         });
         // Save the new user to the database
         newUser.save()
           .then(savedUser => {
-            return cb(null, savedUser); // Return the saved user
+            return cb(null, savedUser);
           })
           .catch(err => {
-            return cb(err); // Pass any error to done
+            return cb(err);
           });
       }
     })
     .catch(err => {
-      return cb(err); // Pass any error to done
+      return cb(err);
     });
 }));
 
 // Serialize user into the session
 passport.serializeUser((user, done) => {
-  done(null, user._id); // Serialize the user's unique identifier into the session
+  done(null, user._id);
 });
 
 // Deserialize user from the session
 passport.deserializeUser((id, done) => {
   User.findById(id)
     .then(user => {
-      done(null, user); // Pass the retrieved user object to done
+      done(null, user);
     })
     .catch(err => {
-      done(err); // Pass any error to done
+      done(err);
     });
 });
+module.exports = passport;

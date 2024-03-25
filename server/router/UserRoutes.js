@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const passport = require('passport'); // Require Passport for authentication
+const passport = require('../config/passport-config'); // Require Passport for authentication
 const { registerUser } = require('../Controllers/userControllers'); // Import user registration controller
 const { activateAccount } = require("../Controllers/AccountActive"); // Import account activation controller
 const { getData } = require("../Controllers/getData"); // Import controller for fetching user data
@@ -16,7 +16,7 @@ router.use(cors({
 }));
 
 // Routes definition
-
+ 
 // Route for registering a new user
 router.post("/register", registerUser);
 
@@ -52,13 +52,13 @@ router.get("/register/failed", (req, res) => {
 });
 
 // Route for Google OAuth callback
-router.get("/auth/google/callback", passport.authenticate("google", {
+router.get("/auth/google/callback", passport.authenticate("google-auth", {
   successRedirect: process.env.CLIENT_URL, // Redirect to client URL on successful authentication
   failureRedirect: `${process.env.CLIENT_URL}register`, // Redirect to registration page on failure
 }));
 
 // Route for initiating Google OAuth authentication
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', passport.authenticate('google-auth', { scope: ['profile', 'email'] }));
 
 // Route for logging out user
 router.get("/logout", (req, res) => {

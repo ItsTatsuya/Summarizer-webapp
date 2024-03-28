@@ -4,5 +4,13 @@
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd client && npm start",
+    "start:backend": "cd server && node server"
   }
 }

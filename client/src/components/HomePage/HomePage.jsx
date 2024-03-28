@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HomePage.css";
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // Import useNavigate
   const { loggedIn } = location.state || {};
+  const [videoUrl, setVideoUrl] = useState("");
+
+  // Helper function to extract the video ID from the YouTube URL
+  const getVideoIdFromUrl = (url) => {
+    const regex = /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+    const match = url.match(regex);
+    return match && match[1].length === 11 ? match[1] : "";
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const videoId = getVideoIdFromUrl(videoUrl);
+    if (videoId) {
+      // Navigate to the SummaryPage with the videoId as a query parameter
+      navigate(`/summary?videoId=${videoId}`);
+    } else {
+      // Display an error message if the URL is invalid
+      console.error("Invalid YouTube URL");
+    }
+  };
   return (
     <div className="body-home">
       <header className="navbar">
@@ -33,19 +54,20 @@ export const HomePage = () => {
       <main className="main-home">
         <section className="content">
           <div className="content-body">
-            <h1 className="heading">
-              Summarize YouTube Videos
-            </h1>
+            <h1 className="heading">Summarize YouTube Videos</h1>
             <p className="sub-heading">
-              Enter a YouTube video URL and get a summary in seconds. Fast. Easy. Accurate.
+              Enter a YouTube video URL and get a summary in seconds. Fast.
+              Easy. Accurate.
             </p>
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit}>
               <input
-                type="email"
+                type="text"
                 className="input"
                 placeholder="Enter YouTube URL"
+                value={videoUrl}
+                onChange={(e) => setVideoUrl(e.target.value)}
               />
-              <button type="button" onClick={""} className="button">
+              <button type="submit" className="button">
                 Summarize Now
               </button>
             </form>
@@ -73,7 +95,8 @@ export const HomePage = () => {
                 Upload Enter the URL of the video
               </h3>
               <p className="step-text">
-                Our advanced algorithm processes the audio and transcript of the video to extract key sentences and phrases.
+                Our advanced algorithm processes the audio and transcript of the
+                video to extract key sentences and phrases.
               </p>
             </div>
             <div className="step">
@@ -97,7 +120,8 @@ export const HomePage = () => {
                 Summarize Let our AI work its magic
               </h3>
               <p className="step-text">
-                Our advanced algorithm processes the audio and transcript of the video to extract key sentences and phrases.
+                Our advanced algorithm processes the audio and transcript of the
+                video to extract key sentences and phrases.
               </p>
             </div>
             <div className="step">
@@ -120,7 +144,8 @@ export const HomePage = () => {
                 Read Enjoy the summarized content
               </h3>
               <p className="step-text">
-                Our advanced algorithm processes the audio and transcript of the video to extract key sentences and phrases.
+                Our advanced algorithm processes the audio and transcript of the
+                video to extract key sentences and phrases.
               </p>
             </div>
           </div>

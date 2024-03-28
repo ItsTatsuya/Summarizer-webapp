@@ -1,0 +1,134 @@
+/* Summary Page Styles */
+.body-summary {
+  width: 100%;
+  padding: 0px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header styles */
+.navbar {
+  background-color: #fff;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px inset black;
+}
+
+.logofont {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.navsign {
+  display: flex;
+  align-items: center;
+  font-size: small;
+}
+
+.navsigninlink {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: small;
+  display: inline;
+  padding: 10px;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Main content styles */
+.main-summary {
+  background-color: #fff;
+  border-radius: 0;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  margin-bottom: 30px;
+}
+
+.video-player {
+  width: 60%;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+
+.summary-box {
+  width: 30%;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-left: 20px;
+}
+
+.summary-box h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.related-videos {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.related-videos h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.video-thumbnail {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.video-thumbnail h4 {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .video-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-player {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .summary-box {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}

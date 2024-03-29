@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import "./SummaryPage.css";
 import { Link, useLocation } from "react-router-dom";
 
 export const SummaryPage = () => {
+  const [isYouTubeLoaded, setIsYouTubeLoaded] = useState(false);
   const location = useLocation();
   const videoId = new URLSearchParams(location.search).get("videoId");
   const opts = {
@@ -13,6 +14,21 @@ export const SummaryPage = () => {
       autoplay: 1,
     },
   };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.youtube.com/iframe_api";
+    script.async = true;
+    script.onload = () => {
+      setIsYouTubeLoaded(true);
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="body-summary">
       <header className="navbar">
@@ -28,7 +44,7 @@ export const SummaryPage = () => {
       <main className="main-summary">
         <section className="video-container">
           <div className="video-player" id="video-player-id">
-            {videoId ? (
+            {isYouTubeLoaded && videoId ? (
               <YouTube videoId={videoId} opts={opts} />
             ) : (
               <p>No video selected</p>

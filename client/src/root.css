@@ -1,0 +1,15 @@
+.theme-light {
+  /* Light theme variables */
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --text-color: #333;
+  /* Add more light theme variables as needed */
+}
+
+.theme-dark {
+  /* Dark theme variables */
+  --primary-color: #17a2b8;
+  --secondary-color: #343a40;
+  --text-color: #f8f9fa;
+  /* Add more dark theme variables as needed */
+}

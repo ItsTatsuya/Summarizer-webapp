@@ -4,10 +4,11 @@ import {Signup} from "./components/Signup/Signup.jsx";
 import {HomePage} from "./components/HomePage/HomePage.jsx";
 import {SummaryPage} from "./components/SummaryPage/SummaryPage.jsx";
 import {BrowserRouter,Routes,Route} from "react-router-dom";
-import  VerifyAccount from "./components/VerifyAccount/VerifyAccount.jsx"
+import VerifyAccount from "./components/VerifyAccount/VerifyAccount.jsx"
 import axios from "axios";
 import {Toaster} from "react-hot-toast";
 import "./App.css"
+
 axios.defaults.baseURL="http://localhost:3001";
 axios.defaults.withCredentials=true;
 

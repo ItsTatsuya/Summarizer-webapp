@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./HomePage.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast"; // Import toast from react-hot-toast
 
 export const HomePage = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // Import useNavigate
+  const navigate = useNavigate();
   const { loggedIn } = location.state || {};
   const [videoUrl, setVideoUrl] = useState("");
 
-  // Helper function to extract the video ID from the YouTube URL
   const getVideoIdFromUrl = (url) => {
     const regex = /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
     const match = url.match(regex);
@@ -19,18 +19,17 @@ export const HomePage = () => {
     e.preventDefault();
     const videoId = getVideoIdFromUrl(videoUrl);
     if (videoId) {
-      // Navigate to the SummaryPage with the videoId as a query parameter
       navigate(`/summary?videoId=${videoId}`);
     } else {
-      // Display an error message if the URL is invalid
-      console.error("Invalid YouTube URL");
+      // Display a toast message if the URL is invalid
+      toast.error("Invalid YouTube URL");
     }
   };
   return (
     <div className="body-home">
       <header className="navbar">
         <div className="logo">
-          <p className="logofont">Youtube Summarizer</p>
+          <p className="logofont">YouTube Summarizer</p>
         </div>
         <nav className="navbar-2">
           <span className="navsign">

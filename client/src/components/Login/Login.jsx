@@ -4,6 +4,14 @@ import "./Login.css";
 import toast from "react-hot-toast";
 import axios from "axios";
 
+const handleGooglelogIn = () => {
+  // Redirect the user to the backend route for Google OAuth authentication
+  window.open(
+    `${process.env.REACT_APP_API_URL}/login/auth/google/callback`,
+    "_self"
+  );
+};
+
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -69,7 +77,7 @@ export const Login = () => {
             </Link>
           </div>
           <div className="Logingoogle">
-            <button type="button" className="Logingooglebutton" onClick={() => { /* Handle Google login */ }}>
+            <button type="button" className="Logingooglebutton" onClick={handleGooglelogIn}>
               Login with Google
             </button>
           </div>

@@ -46,10 +46,10 @@ export const Signup = () => {
                     const verificationInterval = setInterval(async () => {
                         try {
                             const response = await axios.get(`/register/user/${email}`);
-                            console.log(response.data.verified);
+                            // console.log(response.data.verified);
                             if (response.data.verified === true) { // Check the data received from the response
                                 clearInterval(verificationInterval); // Stop the interval once verified
-                                navigate("/"); // Navigate to home page after verification
+                                navigate("/", { state: { loggedIn: true } }); // Navigate to home page after verification
                             }
                         } catch (error) {
                             console.error(error);

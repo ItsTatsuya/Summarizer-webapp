@@ -3,7 +3,7 @@ const axios = require('axios');
 const cors = require('cors');
 require('dotenv').config();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { YoutubeGrabTool, YoutubeTranscriptError } = require('./dist/YoutubeGrabTool.js');
+const { YoutubeGrabTool, YoutubeTranscriptError } = require('../utils/dist/YoutubeGrabTool.js');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -18,7 +18,7 @@ const getSummary = async (req, res) => {
   
       // Combine the transcript text from all chunks
       const transcriptList = transcriptChunks.map(item => item.text);
-      const transcript = transcriptList.join(' ');
+      const transcript = transcriptList.join(' ');5
   
       // Get the summary using Gemini
       const model = genAI.getGenerativeModel({ model: "gemini-pro"});

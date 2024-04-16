@@ -21,7 +21,7 @@ export const SummaryPage = () => {
   useEffect(() => {
     const fetchVideoSummary = async () => {
         try {
-            const response = await axios.post('http://localhost:3001/get-summary', { videoId });
+            const response = await axios.post('/summary', { videoId });
             setVideoSummary(response.data.data);
         } catch (error) {
             console.error('Error fetching video summary:', error);

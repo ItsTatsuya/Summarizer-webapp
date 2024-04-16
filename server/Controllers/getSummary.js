@@ -13,17 +13,18 @@ app.use(cors());
  
 const getSummary = async (req, res) => {
     try {
+      console.log(req.body); 
       // Get the transcript of the video using YoutubeGrabTool
-      const transcriptChunks = await YoutubeGrabTool.fetchTranscript(req.query.videoId);
+      const transcriptChunks = await YoutubeGrabTool.fetchTranscript('https://www.youtube.com/watch?v=' + req.body.videoId);
   
       // Combine the transcript text from all chunks
       const transcriptList = transcriptChunks.map(item => item.text);
-      const transcript = transcriptList.join(' ');5
+      const transcript = transcriptList.join(' ');
   
       // Get the summary using Gemini
       const model = genAI.getGenerativeModel({ model: "gemini-pro"});
   
-      const prompt = `Summarize the following text, with bullet points in 150 words: ${transcript}`;
+      const prompt = `Summarize the following transcript and generate bullet points for all the important points, dont miss out any points, which are valuable: ${transcript}`;
   
       const result = await model.generateContent(prompt);
       const response = await result.response;

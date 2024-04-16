@@ -11,7 +11,7 @@ router.use(cors({
 }));
 
 
-router.post("/summary",getSummary);
+router.post("/summary", getSummary);
 
 
 module.exports = router;

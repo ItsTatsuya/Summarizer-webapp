@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import "./SummaryPage.css";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import { marked } from 'marked';
 
 export const SummaryPage = () => {
   const [isYouTubeLoaded, setIsYouTubeLoaded] = useState(false);
+  const [videoSummary, setVideoSummary] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
   const location = useLocation();
   const videoId = new URLSearchParams(location.search).get("videoId");
+
   const opts = {
     width: 1152,
     height: 648,
@@ -15,6 +20,26 @@ export const SummaryPage = () => {
     },
   };
 
+  useEffect(() => {
+    const fetchVideoSummary = async (videoId) => {
+      try {
+        setIsLoading(true); // Set loading to true before making the request
+        const response = await axios.post("/summary", { videoId });
+        const summaryText = response.data.data;
+        const parsedSummary = marked.parse(summaryText);
+        setVideoSummary(parsedSummary);
+      } catch (error) {
+        console.error("Error fetching video summary:", error);
+      } finally {
+        setIsLoading(false); // Set loading to false after the request completes
+      }
+    };
+    if (videoId) {
+      fetchVideoSummary(videoId);
+    }
+  }, [videoId]);
+
+  // Load YouTube iframe API script
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://www.youtube.com/iframe_api";
@@ -43,7 +68,7 @@ export const SummaryPage = () => {
       </header>
       <main className="main-summary">
         <section className="video-container">
-          <div className="video-player" id="video-player-id">
+          <div className="sticky-video-player" id="video-player-id">
             {isYouTubeLoaded && videoId ? (
               <YouTube videoId={videoId} opts={opts} />
             ) : (
@@ -52,13 +77,11 @@ export const SummaryPage = () => {
           </div>
           <div className="summary-box">
             <h2>Video Summary</h2>
-            <p>{/* Display the summarized content here */}</p>
-          </div>
-        </section>
-        <section className="related-videos">
-          <h3>Related Videos</h3>
-          <div className="video-list">
-            {/* Display a list of related video thumbnails and titles here */}
+            {isLoading ? (
+              <p>Loading summary...</p>
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: videoSummary }} />
+            )}
           </div>
         </section>
       </main>

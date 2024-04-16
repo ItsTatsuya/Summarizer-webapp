@@ -65,6 +65,11 @@
   border-radius: 8px;
 }
 
+.sticky-video-player {
+    position: sticky;
+    top: 100px; /* Adjust this value as needed */
+    z-index: 10;
+}
 
 .summary-box {
   width: 30%;

@@ -4,8 +4,7 @@ require('dotenv').config();
 
 const app = express();
 
-// Route to fetch related videos
-app.get('/related-videos', async (req, res) => {
+const getRelatedVideos = async (req, res) => {
   try {
     const { videoId } = req.query; // Extract videoId from the request query parameters
 
@@ -36,6 +35,6 @@ app.get('/related-videos', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-});
+};
 
-module.exports = getRelated;
+module.exports = getRelatedVideos;

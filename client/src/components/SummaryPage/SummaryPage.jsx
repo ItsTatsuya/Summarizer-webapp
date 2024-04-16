@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import "./SummaryPage.css";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios"; // Add axios for making API requests
 
 export const SummaryPage = () => {
   const [isYouTubeLoaded, setIsYouTubeLoaded] = useState(false);
+  const [relatedVideos, setRelatedVideos] = useState([]); // State to store related videos
+  const [videoSummary,setVideoSummary] = useState(''); // State to store the video summary
   const location = useLocation();
   const videoId = new URLSearchParams(location.search).get("videoId");
   const opts = {
@@ -15,6 +18,21 @@ export const SummaryPage = () => {
     },
   };
 
+  useEffect(() => {
+    const fetchVideoSummary = async () => {
+        try {
+            const response = await axios.post('http://localhost:3001/get-summary', { videoId });
+            setVideoSummary(response.data.data);
+        } catch (error) {
+            console.error('Error fetching video summary:', error);
+        }
+    };
+    if (videoId) {
+        fetchVideoSummary();
+    }
+}, [videoId]);
+
+  // Load YouTube iframe API script
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://www.youtube.com/iframe_api";
@@ -52,13 +70,23 @@ export const SummaryPage = () => {
           </div>
           <div className="summary-box">
             <h2>Video Summary</h2>
-            <p>{/* Display the summarized content here */}</p>
+            <p>{videoSummary}</p>
           </div>
         </section>
         <section className="related-videos">
           <h3>Related Videos</h3>
           <div className="video-list">
-            {/* Display a list of related video thumbnails and titles here */}
+            {relatedVideos.map((video) => (
+              <div key={video.id.videoId} className="related-video-item">
+                <a href={`/summary?videoId=${video.id.videoId}`}>
+                  <img
+                    src={video.snippet.thumbnails.medium.url}
+                    alt={video.snippet.title}
+                  />
+                  <p>{video.snippet.title}</p>
+                </a>
+              </div>
+            ))}
           </div>
         </section>
       </main>
